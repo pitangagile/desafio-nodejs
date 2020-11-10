@@ -92,10 +92,11 @@ Nesta seção sugerimos alguns frameworks para uso, mas fique à vontade para es
 
 * Express
 * Koa
+* Hapi
 
 ### **Etapas para submissão** ###
 
-O canditador ao finalizar a implementação deverá enviar um pull request para o repositório em questão.
+O canditado ao finalizar a implementação deverá enviar um pull request para o repositório em questão.
 
 Segue o passo-a-passo:
 
