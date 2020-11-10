@@ -85,3 +85,27 @@ Obs: O id do usuário pode ser um sequencial gerado pelo banco ou um id único.
 * Banco de dados: MongoDB
 * JWT como token
 * Senha deve ser criptografada
+
+### **Sugestões** ###
+
+Nesta seção sugerimos alguns frameworks para uso, mas fique à vontade para escolher outros que não estiverem na lista.
+
+* Express
+* Koa
+
+### **Etapas para submissão** ###
+
+O canditador ao finalizar a implementação deverá enviar um pull request para o repositório em questão.
+
+Segue o passo-a-passo:
+
+1. Fazer fork do respositório
+2. Implementar seu projeto no fork realizado.
+3. Comitar e subir todas as alteraçes para o fork criado por você.
+4. Enviar um pull request pelo Github.
+
+O fork deverá ser público para inspeção do código.
+
+### **Observações** ###
+
+Não fazer push para este repositório.
