@@ -1,5 +1,8 @@
 import jwt from 'jsonwebtoken';
-import { secret } from '../config.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
+const { JWT_SECRET } = process.env;
 
 export default (req, res, next) => {
   const { authorization } = req.headers;
@@ -13,7 +16,7 @@ export default (req, res, next) => {
 
   token = authorization.slice(7, authorization.length);
 
-  jwt.verify(token, secret, (err, decoded) => {
+  jwt.verify(token, JWT_SECRET, (err, decoded) => {
     if (err) {
       if (err.message === 'jwt expired')
         return res.status(401).send({ message: 'Unauthorized - invalid session', errorCode: 401 });
