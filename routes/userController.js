@@ -51,6 +51,7 @@ const validate = (userObj) => {
 }
 
 const signup = async (req, res) => {
+  console.log('req.body', req.body);
   const { email } = req.body;
   const validation = validate(req.body);
   if (!validation.isValid)

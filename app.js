@@ -1,6 +1,7 @@
 import { db } from './db/index.js';
 import { app } from './routes/userRoutes.js';
 import dotenv from 'dotenv';
+
 // import swaggerJsdoc from 'swagger-jsdoc';
 
 dotenv.config();
