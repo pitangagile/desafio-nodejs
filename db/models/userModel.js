@@ -22,6 +22,7 @@ const userModel = (mongoose) => {
       required: true
     },
     phones: [{
+      _id: false,
       number: Number,
       area_code: Number,
       country_code: String
@@ -31,8 +32,8 @@ const userModel = (mongoose) => {
     },
     last_login: {
       type: Date,
-    }
-  });
+    } 
+  },{versionKey: false});
 
   userSchema.pre('save', async function(next) {
     const hash = await bcrypt.hash(this.password, 10);

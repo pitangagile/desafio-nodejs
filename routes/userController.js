@@ -10,7 +10,6 @@ const User = db.user;
 
 const generateToken = (id) => {
   const token = jwt.sign({ id: id }, JWT_SECRET, { expiresIn: 10*60 });
-  // const token = jwt.sign({ id: id }, JWT_SECRET, { expiresIn: '24h' });
   return token;
 }
 
@@ -51,7 +50,6 @@ const validate = (userObj) => {
 }
 
 const signup = async (req, res) => {
-  console.log('req.body', req.body);
   const { email } = req.body;
   const validation = validate(req.body);
   if (!validation.isValid)
@@ -75,15 +73,15 @@ const signin = async (req, res) => {
   if (!validateEmail(email) || password.trim().length < 4)
     return res.status(422).send({ message: 'Invalid fields', errorCode: 422 });
   try {
-    const user = await User.findOne({ email }).select('+password');
+    let user = await User.findOne({ email }).select('+password');
     if (!user || !await bcrypt.compare(password, user.password)) 
       return res.status(404).send({ message: 'Invalid e-mail or password', errorCode: 404 });
 
     const timestamp = new Date().getTime();
     const dateBr = new Date(timestamp - BR_OFFSET);
-    const userUpdated = await User.findByIdAndUpdate(user.id, { last_login: dateBr }, { new:true });
+    user = await User.findByIdAndUpdate(user.id, { last_login: dateBr }, { new:true });
     user.password = undefined;
-    res.status(200).send({ userUpdated, token: generateToken(user.id) });
+    res.status(200).send({ user, token: generateToken(user.id) });
   } catch (error) {
     return res.status(400).send({ message: error, errorCode: 400 });
   }
@@ -92,12 +90,12 @@ const signin = async (req, res) => {
 const getUser = async (req, res) => {
   const { id } = req;
   try {
-    const user = await User.findById(id);
-    res.status(200).send(user);
+    const user = await User.findById(id, {_id: false});
+    user.id = undefined;
+    res.status(200).send({ user });
   } catch (error) {
     return res.status(400).send({ message: error, errorCode: 400 });
   }
 }
-
 
 export { signup, signin, getUser };

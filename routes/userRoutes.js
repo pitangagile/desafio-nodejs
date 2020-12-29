@@ -15,7 +15,6 @@ app.post('/signup', signup);
 
 app.post('/signin', signin);
 
-
 app.get('/me', middleware, getUser);
 
 export { app };
