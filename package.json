@@ -1,0 +1,38 @@
+{
+  "name": "desafio-nodejs",
+  "version": "1.0.0",
+  "description": "Criar aplicação que exponha uma API RESTful de criação de usuários com login.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fernandolopes-38/desafio-nodejs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/fernandolopes-38/desafio-nodejs/issues"
+  },
+  "homepage": "https://github.com/fernandolopes-38/desafio-nodejs#readme",
+  "engines": {
+    "node": "15.4.0"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.8",
+    "swagger-jsdoc": "^6.0.0",
+    "swagger-ui-express": "^4.1.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
