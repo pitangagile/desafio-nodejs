@@ -29,21 +29,17 @@ const userModel = (mongoose) => {
     }],
     created_at: {
       type: Date,
+      default: Date.now
     },
     last_login: {
       type: Date,
+      default: Date.now
     } 
   },{versionKey: false});
 
   userSchema.pre('save', async function(next) {
     const hash = await bcrypt.hash(this.password, 10);
     this.password = hash;
-
-    const timestamp = new Date().getTime();
-    const dateBr = new Date(timestamp - BR_OFFSET);
-    this.created_at = dateBr;
-    this.last_login = dateBr;
-    
     next();
   });
 

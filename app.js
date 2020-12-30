@@ -1,22 +1,48 @@
-import { db } from './db/index.js';
+import db from './db/index.js';
 import { app } from './routes/userRoutes.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
-global.BR_OFFSET = 3*60*60*1000;
 
-(async () => {
-  try {
-    await db.mongoose.connect(db.url, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: false
-    });
+db.mongoose.connect(db.url, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false
+}, err => {
+  if (err) {
+    console.log('Database error', err);
+  } else {
     console.log('Databse connected');
-  } catch (error) {
-    console.log('Database error', error);
   }
-})();
+});
+
+// const options = {
+//   definition: {
+//     openapi: "3.0.0",
+//     info: {
+//       title: "LogRocket Express API with Swagger",
+//       version: "0.1.0",
+//       description:
+//         "This is a simple CRUD API application made with Express and documented with Swagger",
+//     },
+//     servers: [
+//       {
+//         url: "https://desafio-pitang-fl.herokuapp.com/",
+//       },
+//     ],
+//   },
+//   apis: ['./routes/userRoutes.js'],
+// };
+
+// import swaggerJsdoc from 'swagger-jsdoc';
+// import swaggerUi from 'swagger-ui-express';
+
+// const specs = swaggerJsdoc(options);
+// app.use(
+//   "/api-docs",
+//   swaggerUi.serve,
+//   swaggerUi.setup(specs)
+// );
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

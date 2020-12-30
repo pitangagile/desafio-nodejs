@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { db } from '../db/index.js';
+import db from '../db/index.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -77,9 +77,7 @@ const signin = async (req, res) => {
     if (!user || !await bcrypt.compare(password, user.password)) 
       return res.status(404).send({ message: 'Invalid e-mail or password', errorCode: 404 });
 
-    const timestamp = new Date().getTime();
-    const dateBr = new Date(timestamp - BR_OFFSET);
-    user = await User.findByIdAndUpdate(user.id, { last_login: dateBr }, { new:true });
+    user = await User.findByIdAndUpdate(user.id, { last_login: new Date() }, { new:true });
     user.password = undefined;
     res.status(200).send({ user, token: generateToken(user.id) });
   } catch (error) {

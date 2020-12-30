@@ -5,10 +5,8 @@ dotenv.config();
 
 const { DB_URI } = process.env;
 
-const db = {};
-
-db.url = DB_URI;
-db.mongoose = mongoose;
-db.user = userModel(mongoose);
-
-export { db };
+export default {
+  url: DB_URI,
+  mongoose: mongoose,
+  user: userModel(mongoose)
+};
