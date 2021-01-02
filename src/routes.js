@@ -4,15 +4,15 @@ const controller = require('./controller/index')
 
 const routes = Router();
 
-routes.get("/", function(req, res){
-  res.status(200).json({
-    "message": "It works!"
-  })
-})
+// routes.get("/", function(req, res){
+//   res.status(200).json({
+//     message: "It works!"
+//   })
+// })
 
 routes.post("/signup", validate.SignUp(), controller.SignUp)
 
-routes.get("/signin", validate.SignIn(), controller.SignIn)
+routes.post("/signin", validate.SignIn(), controller.SignIn)
 
 routes.get("/me", validate.Me(), controller.Me)
 
