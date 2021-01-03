@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const validate = require('./middleware/validate')
+const validate = require('./middleware/validate.js')
 const controller = require('./controller/index.js')
 
 const routes = Router();
