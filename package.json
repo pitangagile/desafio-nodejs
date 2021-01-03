@@ -2,10 +2,10 @@
   "name": "api_pitang",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "dev": "nodemon index.js --ignore __tests__",
-    "start": "node index.js",
+    "start": "node src/index.js",
     "test": "jest --forceExit --detectOpenHandles"
   },
   "author": "",
