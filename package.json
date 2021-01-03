@@ -1,0 +1,31 @@
+{
+  "name": "api_pitang",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon index.js --ignore __tests__",
+    "start": "node src/index.js",
+    "test": "jest --forceExit --detectOpenHandles"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.9",
+    "yup": "^0.32.8"
+  },
+  "devDependencies": {
+    "@jest/core": "^26.6.3",
+    "factory-girl": "^5.0.4",
+    "faker": "^5.1.0",
+    "jest": "^26.6.3",
+    "jest-cli": "^26.6.3",
+    "nodemon": "^2.0.6",
+    "supertest": "^6.0.1"
+  }
+}
