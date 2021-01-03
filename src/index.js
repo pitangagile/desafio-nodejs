@@ -6,11 +6,11 @@ require('dotenv').config({
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-const routes = require('./src/routes')
+const routes = require('./routes.js')
 
 const app = express();
 
-require('./src/database/database')
+require('./database/database.js')
 
 app.use(cors())
 
