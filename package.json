@@ -1,0 +1,31 @@
+{
+  "name": "desafio-nodejs",
+  "version": "1.0.0",
+  "description": "Criar aplicação que exponha uma API RESTful de criação de usuários com login.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrmorais/desafio-nodejs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrmorais/desafio-nodejs/issues"
+  },
+  "homepage": "https://github.com/mrmorais/desafio-nodejs#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.9",
+    "yup": "^0.32.8"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
