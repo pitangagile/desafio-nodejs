@@ -4,7 +4,7 @@
   "description": "Criar aplicação que exponha uma API RESTful de criação de usuários com login.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "nodemon src/index.js"
   },
   "repository": {
@@ -26,6 +26,9 @@
     "yup": "^0.32.8"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^8.2.1",
     "nodemon": "^2.0.6"
   }
 }
