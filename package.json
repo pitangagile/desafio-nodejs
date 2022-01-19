@@ -1,0 +1,22 @@
+{
+  "name": "desafio-nodejs",
+  "version": "1.0.0",
+  "description": "# API RESTful de usuários + login",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fbrunodr/desafio-nodejs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fbrunodr/desafio-nodejs/issues"
+  },
+  "homepage": "https://github.com/fbrunodr/desafio-nodejs#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
