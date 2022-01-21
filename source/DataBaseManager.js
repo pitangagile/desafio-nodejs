@@ -12,6 +12,12 @@ class DataBaseManager{
 		return result
 	}
 
+	put = async (data) =>{
+		await this.client.connect()
+		let result = await this.client.db("DesafioNodeJs").collection("SigningAPI").insertOne(data)
+		return result
+	}
+
 	checkConnection = async () => {
 		try {
 			await this.client.connect();

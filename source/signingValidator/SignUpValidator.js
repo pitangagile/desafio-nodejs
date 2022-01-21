@@ -1,4 +1,4 @@
-const SigningValidator = require("./SigningValidator");
+const SigningValidator = require("./SigningValidator")
 const DataBaseManager = require("../DataBaseManager")
 
 class SignUpValidator extends SigningValidator{

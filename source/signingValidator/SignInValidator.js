@@ -1,4 +1,4 @@
-const SigningValidator = require("./SigningValidator");
+const SigningValidator = require("./SigningValidator")
 
 class SignInValidator extends SigningValidator{
 
