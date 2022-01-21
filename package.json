@@ -4,6 +4,8 @@
   "description": "# API RESTful de usuários + login",
   "main": "app.js",
   "scripts": {
+    "start": "nodemon app.js",
+    "startAuth": "nodemon authServer.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,6 +19,7 @@
   },
   "homepage": "https://github.com/fbrunodr/desafio-nodejs#readme",
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "mongodb": "^4.3.1"
   }
 }
