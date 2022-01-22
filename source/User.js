@@ -56,6 +56,7 @@ class User{
             throw new Error("Can't add user to database. Missing refresh token.")
 
         this.dataBaseManager.put(this.userData)
+        this.isOnDB = true
         return this
     }
 

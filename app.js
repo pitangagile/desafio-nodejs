@@ -27,9 +27,14 @@ app.post('/signup', async (req, res) => {
 
     let user = new User()
     await user.init(data)
+
     let authorizer = new UserAuthorizer()
     let refreshToken = await authorizer.generateRefreshToken(user)
     user.addRefreshToken(refreshToken)
+
+    let authenticator = new UserAuthenticator()
+    authenticator.hashUserPassword(user)
+    
     await user.pushToDB()
 
     let response = {token: refreshToken}

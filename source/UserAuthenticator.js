@@ -7,19 +7,26 @@ class UserAuthenticator{
         this.saltRounds = 10
     }
 
-    getUserByAuthentication = async user =>{
-        let email = user.email
-        let password = user.password // TO DO : ENCRYPT
+    hashUserPassword = user =>{
+        let password = user.userData.password
+        const hash = bcrypt.hashSync(password, this.saltRounds);
+        user.userData.password = hash
+        return user
+    }
+
+    getUserByAuthentication = async userAuthentication =>{
+        let email = userAuthentication.email
+        let password = userAuthentication.password
         let dataBaseManager = new DataBaseManager()
         let dataBaseQuery = {email: email}
         let userData = await dataBaseManager.get(dataBaseQuery)
         if(userData == null)
             return null
-        if(userData.password != password)
+        if(!bcrypt.compareSync(password, userData.password))
             return null
-        let userObj = new User()
-        await userObj.init(userData)
-        return userObj
+        let user = new User()
+        await user.init(userData)
+        return user
     }
 }
 
