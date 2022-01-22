@@ -27,6 +27,9 @@ class SignUpValidator extends SigningValidator{
 		if(this.hasMissingKey(data, this.validKeys))
 			return true
 		
+		if(typeof data['phones'] != 'object')
+			return true
+
 		if(data['phones'].length < 1)
 			return true
 

@@ -34,7 +34,7 @@ app.post('/signup', async (req, res) => {
 
     let authenticator = new UserAuthenticator()
     authenticator.hashUserPassword(user)
-    
+
     await user.pushToDB()
 
     let response = {token: refreshToken}
@@ -72,6 +72,8 @@ app.post('/signin', async (req, res) => {
 app.get('/me', async (req, res) => {
     // To DO
     // REFRESH TOKEN
+    // ...
+    // It's not clear how I should do it, so I didn't
     let token = req.headers.token
 
     let authorizer = new UserAuthorizer()
@@ -106,5 +108,5 @@ errorResponse = (message, errorCode) =>{
 
 
 app.listen(port, () => {
-  	console.log(`Example app listening at http://localhost:${port}`)
+  	console.log(`Listening at http://localhost:${port}`)
 })
