@@ -11,7 +11,7 @@ const app = express()
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const port = 3000
+const port = process.env.PORT
 
 
 app.post('/signup', async (req, res) => {
