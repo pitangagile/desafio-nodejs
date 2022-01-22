@@ -3,9 +3,9 @@ require('dotenv').config()
 const express = require('express')
 const SignUpValidator = require('./source/signingValidator/SignUpValidator')
 const SignInValidator = require('./source/signingValidator/SignInValidator')
-const DataBaseManager = require('./source/DataBaseManager')
 const UserAuthorizer = require('./source/UserAuthorizer')
 const UserAuthenticator = require('./source/UserAuthenticator')
+const User = require('./source/User')
 
 const app = express()
 app.use(express.json());
@@ -18,28 +18,19 @@ app.post('/signup', async (req, res) => {
 	let data = req.body
 
   	let signUpValidator = new SignUpValidator()
-  	if(signUpValidator.hasInvalidField(data)){
-    	res.status(400).send(errorResponse('Invalid fields', 400))
-    	return;
-  	}
-  	if(signUpValidator.hasMissingField(data)){
-    	res.status(400).send(errorResponse('Missing fields', 400))
-    	return;
-  	}
-	if(await signUpValidator.emailAlreadyExists(data['email'])){
-    	res.status(400).send(errorResponse('E-mail already exists', 400))
-    	return;
-	}
+  	if(signUpValidator.hasInvalidField(data))
+    	return res.status(400).send(errorResponse('Invalid fields', 400))
+  	if(signUpValidator.hasMissingField(data))
+    	return res.status(400).send(errorResponse('Missing fields', 400))
+	if(await signUpValidator.emailAlreadyExists(data['email']))
+    	return res.status(400).send(errorResponse('E-mail already exists', 400))
 
+    let user = new User()
+    await user.init(data)
     let authorizer = new UserAuthorizer()
-    let refreshToken = await authorizer.generateRefreshToken(data)
-    data['refreshToken'] = refreshToken
-    // TO DO
-    //data['created_at']
-    //data['last_login']
-
-    let databaseManager = new DataBaseManager()
-    databaseManager.put(data)
+    let refreshToken = await authorizer.generateRefreshToken(user)
+    user.addRefreshToken(refreshToken)
+    await user.pushToDB()
 
     let response = {token: refreshToken}
 
@@ -51,25 +42,22 @@ app.post('/signin', async (req, res) => {
   	let data = req.body
 
   	let signInValidator = new SignInValidator()
-  	if(signInValidator.hasInvalidField(data)){
-    	res.status(400).send(errorResponse('Invalid fields', 400))
-    	return;
-  	}
-  	if(signInValidator.hasMissingField(data)){
-    	res.status(400).send(errorResponse('Missing fields', 400))
-    	return;
-  	}
+  	if(signInValidator.hasInvalidField(data))
+    	return res.status(400).send(errorResponse('Invalid fields', 400))
+  	if(signInValidator.hasMissingField(data))
+    	return res.status(400).send(errorResponse('Missing fields', 400))
 
     let authenticator = new UserAuthenticator()
-    let isAuthentic = await authenticator.isAuthentic(data)
-    if(!isAuthentic){
+    let user = await authenticator.getUserByAuthentication(data)
+    if(user == null){
         res.status(401).send(errorResponse('Invalid e-mail or password', 401))
         return;
     }
 
+    user.updateLastLogin()
+
     let authorizer = new UserAuthorizer()
-    let accessToken = await authorizer.generateAccessToken(data)
-  
+    let accessToken = await authorizer.generateAccessToken(user)
     let response = {token: accessToken}
 
   	res.status(200).send(response)
@@ -82,16 +70,15 @@ app.get('/me', async (req, res) => {
     let token = req.headers.token
 
     let authorizer = new UserAuthorizer()
-    let userData = await authorizer.authorizeAccesToken(token)
-    if(userData == 401){
-        res.status(401).send(errorResponse('Unauthorized', 401))
-        return;
-    }
-    if(userData == 403){
-        res.status(403).send(errorResponse('Unauthorized - invalid session', 403))
-        return;
-    }
+    let user = await authorizer.getUserByAuthorization(token)
+    if(user == 401)
+        return res.status(401).send(errorResponse('Unauthorized', 401))
+    if(user == 403)
+        return res.status(403).send(errorResponse('Unauthorized - invalid session', 403))
 
+    user.updateLastLogin()
+
+    let userData = user.userData
     delete userData['_id']
     delete userData['refreshToken']
     delete userData['password']

@@ -18,6 +18,13 @@ class DataBaseManager{
 		return result
 	}
 
+	update = async (query, update) =>{
+		update = { $set: update }
+		await this.client.connect()
+		let result = await this.client.db("DesafioNodeJs").collection("SigningAPI").updateOne(query, update)
+		return result
+	}
+
 	checkConnection = async () => {
 		try {
 			await this.client.connect();
