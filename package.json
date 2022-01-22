@@ -4,8 +4,7 @@
   "description": "# API RESTful de usuários + login",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
-    "startAuth": "nodemon authServer.js",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
