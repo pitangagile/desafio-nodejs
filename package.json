@@ -4,7 +4,7 @@
   "description": "Criar aplicação que exponha uma API RESTful de criação de usuários com login.",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node index.js",
     "test": "jest --forceExit"
   },
   "repository": {
@@ -21,6 +21,7 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.2",
+    "cors": "^2.8.5",
     "express": "^4.17.3",
     "jest": "^27.5.1",
     "jsonwebtoken": "^8.5.1",
