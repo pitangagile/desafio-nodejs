@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
   res.status(200).send({ message: "Server running" });
 });
 
-app.use(require("./src/app/controllers/AuthController"));
+require("./src/app/controllers/AuthController")(app);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`App listening on port: ${process.env.PORT}...`);
