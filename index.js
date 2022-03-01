@@ -20,8 +20,8 @@ app.get("/", (req, res) => {
 
 app.use(require("./src/app/controllers/AuthController"));
 
-app.listen(8080, () => {
-  console.log(`App listening on port: ${8080}...`);
+app.listen(process.env.PORT || 3000, () => {
+  console.log(`App listening on port: ${process.env.PORT}...`);
 });
 
 module.exports = app;
