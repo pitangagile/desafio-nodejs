@@ -1,3 +1,15 @@
+# Informações da entrega
+- Link da aplicação hospedada no Heroku: <https://desafio-nodejs-api.herokuapp.com>
+- Versão do node:  ![](https://img.shields.io/badge/node-v14.16.0-brightgreen.svg)
+- Banco de dados: MongoDB (Atlas)
+- Framework utilizado: Express
+- JWT Token como token utilizado com o prefixo Bearer
+- Senha criptografada com bcrypt
+- Testes unitarios escritos no arquivo index.test.js
+
+---
+
+
 # desafio-nodejs
 
 # API RESTful de usuários + login
